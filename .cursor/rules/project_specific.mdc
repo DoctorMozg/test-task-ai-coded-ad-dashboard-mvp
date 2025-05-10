@@ -1,0 +1,84 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Advertising Dashboard MVP Project Rules
+
+## Streamlit Best Practices
+- Use session state for managing application state
+- Organize UI with appropriate Streamlit containers (st.container, st.columns)
+- Cache expensive operations with @st.cache_data
+- Keep UI components modular and reusable
+- Use st.form when collecting multiple inputs to prevent reruns
+
+## Project-Specific Data Models
+- All models MUST use Pydantic with Schema postfix
+- Always use Annotated[Type, Field(...)] syntax for fields
+- Use UUIDs for all entity IDs
+- Follow strict validation rules for all user inputs
+- Use Enums for status fields and categorical data
+
+## In-Memory Storage Patterns
+- Use dictionary-based stores with consistent patterns
+- Implement proper indexing for efficient lookups
+- Maintain consistency between related data
+- Implement memory limits for all collections
+- Add helper methods for common query patterns
+- Handle exceptions properly in all storage operations
+
+## Authentication Implementation
+- Use secure password hashing with PBKDF2
+- Implement proper session management using Streamlit session state
+- Verify authentication status for all protected routes
+- Create clear separation between public and protected views
+- Never store passwords in plain text, even in development
+
+## OpenRouter.ai Integration
+- Keep API key secure using environment variables
+- Implement proper error handling for API calls
+- Use appropriate AI models for different tasks
+- Add retry logic for failed API requests
+- Cache AI responses when appropriate
+- Limit API calls for cost efficiency
+
+## Campaign Management
+- Implement step-by-step UI for campaign creation
+- Validate all campaign parameters before submission
+- Maintain consistent status workflow
+- Implement proper image upload validation
+- Keep UI responsive by optimizing data operations
+
+## Analytics Implementation
+- Generate realistic mock data for demonstration
+- Use appropriate chart types for different metrics
+- Implement date range filtering consistently
+- Format metrics appropriately (percentages, currency, etc.)
+- Keep calculations and aggregations efficient
+
+## Project Structure
+- Follow the defined project structure in STRUCTURE.md
+- Maintain clear separation between UI, data, and services
+- Organize Streamlit pages in numerical order (1_login.py, 2_dashboard.py)
+- Keep UI components modular and reusable
+- Store static assets in the assets directory
+
+## File Naming Conventions
+- Use snake_case for all file names
+- Use descriptive names that reflect content
+- Group related files in appropriate packages
+- Maintain consistent naming patterns
+
+## Testing and Validation
+- Validate all user inputs before processing
+- Provide clear feedback for validation errors
+- Test core functionality manually
+- Verify memory usage for larger datasets
+- Test all workflows end-to-end
+
+## Documentation Standards
+- Document all functions and classes
+- Maintain comprehensive README
+- Document AI usage clearly
+- Include setup instructions and dependencies
+- Use consistent documentation style
