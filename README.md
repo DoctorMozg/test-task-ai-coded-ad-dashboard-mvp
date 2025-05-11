@@ -1,12 +1,74 @@
 # Advertising Dashboard MVP
 
-A minimal viable product of an advertising dashboard with basic functionality.
+A streamlined Advertising Campaign management system built with Streamlit. This MVP allows for campaign creation, management, analytics visualization, and includes AI-powered features for campaign naming and ad copy generation.
 
 ## Features
 
-- User authentication
-- Ad campaign creation (banner upload, audience targeting)
-- Campaign management (list view with status tracking)
+- User authentication with secure password management
+- Campaign creation and management
+- Performance analytics with visualizations
+- AI assistance for campaign naming and copy generation
+- In-memory data storage with efficient patterns
+
+## Development Setup
+
+### Requirements
+
+- Python 3.13
+- UV package manager
+
+### Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/yourusername/advertising-dashboard.git
+   cd advertising-dashboard
+   ```
+
+2. Create and activate a virtual environment:
+
+   ```bash
+   uv venv
+   source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+   ```
+
+3. Install dependencies:
+
+   ```bash
+   uv pip install -e .
+   ```
+
+4. Setup environment variables:
+
+   ```bash
+   cp .env.example .env
+   # Edit .env with your configuration
+   ```
+
+### Running the Application
+
+```bash
+python run.py
+```
+
+The application will be available at <http://localhost:8501>
+
+## Project Structure
+
+The project follows a clean architecture pattern with clear separation of concerns:
+
+- `dashboard/app`: Streamlit UI and pages
+- `dashboard/data`: Data models and storage
+- `dashboard/services`: Business logic and external services
+- `dashboard/assets`: Static assets and mock data
+
+## Authentication
+
+For demo purposes, use the following credentials:
+
+- Username: `demo`
+- Password: `demo123`
 
 ## Tech Stack
 

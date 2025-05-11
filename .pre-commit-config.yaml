@@ -11,7 +11,7 @@ repos:
     rev: 'v0.9.10'
     hooks:
       - id: ruff
-        args: ['--fix']
+        args: ['--fix', '--unsafe-fixes']
         types: [python]
       - id: ruff-format
 

@@ -53,24 +53,24 @@ class InMemoryStore:
     def __init__(self):
         self._data = {}  # Main data dictionary
         self._indices = {}  # Optional indices for faster lookups
-        
+
     def add(self, item):
         """Add an item to the store"""
         self._data[item.id] = item
         self._update_indices(item)
-        
+
     def get(self, item_id):
         """Get an item by ID"""
         return self._data.get(item_id)
-        
+
     def list(self, filters=None):
         """List items, optionally filtered"""
         # Apply filters and return matching items
-        
+
     def update(self, item_id, data):
         """Update an existing item"""
         # Update item and indices
-        
+
     def delete(self, item_id):
         """Remove an item"""
         # Remove from data and indices

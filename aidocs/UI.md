@@ -89,12 +89,12 @@ def display_ai_suggestions(campaign_info):
     if st.button("Get AI Campaign Name Suggestions"):
         with st.spinner("Generating campaign name ideas..."):
             suggestions = get_campaign_suggestions(
-                campaign_info["product"], 
+                campaign_info["product"],
                 campaign_info["audience"]
             )
-            
+
         st.success("AI suggestions generated!")
-        
+
         # Display suggestions in a clean UI
         for i, suggestion in enumerate(suggestions, 1):
             col1, col2 = st.columns([4, 1])
@@ -138,4 +138,4 @@ For the MVP, simple mockups include:
 - Simplified views on smaller screens
 - Touch-friendly inputs
 
-This UI implementation provides a clean, focused interface for the Advertising Dashboard MVP while leveraging Streamlit's capabilities for rapid development. The simplified approach prioritizes core functionality while maintaining a good user experience. 
+This UI implementation provides a clean, focused interface for the Advertising Dashboard MVP while leveraging Streamlit's capabilities for rapid development. The simplified approach prioritizes core functionality while maintaining a good user experience.

@@ -111,17 +111,17 @@ import json
 
 def get_campaign_suggestions(product_type, target_audience):
     """Generate campaign name suggestions using OpenRouter.ai"""
-    
+
     prompt = f"""
-    Generate 3 creative campaign name ideas for a {product_type} advertisement 
+    Generate 3 creative campaign name ideas for a {product_type} advertisement
     targeting {target_audience}. Response should be a JSON array of strings.
     """
-    
+
     headers = {
         "Content-Type": "application/json",
         "Authorization": f"Bearer {OPENROUTER_API_KEY}"
     }
-    
+
     payload = {
         "model": "anthropic/claude-3-haiku-20240307",
         "messages": [
@@ -129,13 +129,13 @@ def get_campaign_suggestions(product_type, target_audience):
         ],
         "response_format": {"type": "json_object"}
     }
-    
+
     response = requests.post(
         "https://openrouter.ai/api/v1/chat/completions",
         headers=headers,
         json=payload
     )
-    
+
     if response.status_code == 200:
         result = response.json()
         return json.loads(result["choices"][0]["message"]["content"])["campaign_names"]
@@ -143,4 +143,4 @@ def get_campaign_suggestions(product_type, target_audience):
         return ["Campaign Idea 1", "Campaign Idea 2", "Campaign Idea 3"]
 ```
 
-This simplified campaign management implementation provides essential functionality for creating and managing advertising campaigns in the MVP, focusing on ease of use and quick implementation while setting the foundation for future enhancements. 
+This simplified campaign management implementation provides essential functionality for creating and managing advertising campaigns in the MVP, focusing on ease of use and quick implementation while setting the foundation for future enhancements.

@@ -80,49 +80,19 @@
 
 ### Implementation Approach
 
-```python
-# Example OpenRouter.ai integration
-import requests
-import json
-import os
+OpenRouter.ai integration will be implemented with the following principles:
 
-OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
-OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
+- OpenRouter API key and settings should be stored in a dedicated settings file
+- API endpoint URLs and model selections should be configurable in the settings
+- Different AI models should be selectable for different tasks (copy generation vs. insights)
+- Implementation should include error handling and graceful fallbacks
+- Requests should be rate-limited to prevent excessive API usage
+- Results should be cached when appropriate to minimize costs
+- User feedback mechanism for AI-generated content should be included
+- Default prompt templates should be defined in the settings file
+- Logging of API usage for monitoring purposes
 
-def generate_ad_copy(campaign_info):
-    """Generate ad copy based on campaign information using OpenRouter.ai"""
-    
-    prompt = f"""
-    Create a compelling ad description for a campaign with the following details:
-    - Product: {campaign_info['product']}
-    - Target audience: {campaign_info['audience']}
-    - Campaign goal: {campaign_info['goal']}
-    
-    The ad copy should be concise, engaging, and persuasive.
-    """
-    
-    headers = {
-        "Content-Type": "application/json",
-        "Authorization": f"Bearer {OPENROUTER_API_KEY}"
-    }
-    
-    payload = {
-        "model": "anthropic/claude-3-haiku-20240307",
-        "messages": [
-            {"role": "user", "content": prompt}
-        ]
-    }
-    
-    try:
-        response = requests.post(OPENROUTER_URL, headers=headers, json=payload)
-        if response.status_code == 200:
-            result = response.json()
-            return result["choices"][0]["message"]["content"]
-        else:
-            return f"Error generating ad copy: {response.status_code}"
-    except Exception as e:
-        return f"Error connecting to OpenRouter.ai: {str(e)}"
-```
+This approach ensures a flexible, maintainable integration with OpenRouter.ai that can be easily configured and extended without changing code.
 
 ## Technical Architecture
 

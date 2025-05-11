@@ -19,12 +19,14 @@ This document outlines the authentication implementation for the Advertising Das
   - Python dictionary with user records keyed by user ID
   - Secondary indices for username and email lookups
   - Based on UserSchema from MODEL.md
+
   ```python
   # Example in-memory user store structure
   users_by_id = {}
   users_by_username = {}
   users_by_email = {}
   ```
+
 - **User Record Structure**:
   - `id` (UUID4): Primary key
   - `username`: Unique username
@@ -102,7 +104,7 @@ def initialize_mock_users():
     from datetime import datetime
     import uuid
     from passlib.hash import pbkdf2_sha256
-    
+
     mock_users = [
         {
             "id": str(uuid.uuid4()),
@@ -121,7 +123,7 @@ def initialize_mock_users():
             "last_login": None
         }
     ]
-    
+
     # Add to in-memory store
     for user in mock_users:
         users_by_id[user["id"]] = user

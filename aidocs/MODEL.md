@@ -123,7 +123,7 @@ class InMemoryStorage:
         self.targeting = {}  # Indexed by targeting_id
         self.analytics = {}  # Indexed by analytics_id
         self.ad_copies = {}  # Indexed by ad_copy_id
-        
+
         # Secondary indices for efficient lookups
         self.users_by_username = {}
         self.users_by_email = {}

@@ -69,22 +69,22 @@ def generate_mock_metrics(campaign_id, days=7):
     """Generate simple mock metrics for a campaign"""
     start_date = datetime.now() - timedelta(days=days)
     metrics = []
-    
+
     # Base metrics that look somewhat realistic
     base_impressions = random.randint(500, 2000)
     base_ctr = random.uniform(1.0, 3.0)
-    
+
     for i in range(days):
         day = start_date + timedelta(days=i)
-        
+
         # Add some randomness and a slight trend
         daily_impressions = base_impressions + random.randint(-200, 200)
         daily_impressions += i * 50  # Slight upward trend
-        
+
         # Calculate clicks based on a realistic CTR
         daily_ctr = base_ctr + random.uniform(-0.5, 0.5)
         daily_clicks = int(daily_impressions * daily_ctr / 100)
-        
+
         metrics.append({
             "campaign_id": campaign_id,
             "date": day.date(),
@@ -93,7 +93,7 @@ def generate_mock_metrics(campaign_id, days=7):
             "ctr": daily_clicks / daily_impressions * 100 if daily_impressions > 0 else 0,
             "cost": daily_clicks * random.uniform(0.5, 1.5)  # Simple cost calculation
         })
-    
+
     return metrics
 ```
 
@@ -119,4 +119,4 @@ For campaigns that have accumulated some data, integrate with OpenRouter.ai to:
 - Suggest basic optimization tips
 - Provide natural language summaries of campaign performance
 
-This simplified analytics approach provides essential insights for the MVP while keeping implementation straightforward and avoiding unnecessary complexity. As the product evolves, more sophisticated analytics features can be added based on user feedback and needs. 
+This simplified analytics approach provides essential insights for the MVP while keeping implementation straightforward and avoiding unnecessary complexity. As the product evolves, more sophisticated analytics features can be added based on user feedback and needs.
