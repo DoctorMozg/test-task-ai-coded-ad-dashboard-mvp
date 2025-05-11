@@ -4,4 +4,4 @@
 cd "$(dirname "$0")"
 
 # Run the Streamlit app
-uv run streamlit run dashboard/app/main.py --browser.serverAddress=0.0.0.0 --server.port=8501 "$@"
+PYTHONPATH=. uv run streamlit run dashboard/app/main.py --browser.serverAddress=0.0.0.0 --server.port=8501 "$@"

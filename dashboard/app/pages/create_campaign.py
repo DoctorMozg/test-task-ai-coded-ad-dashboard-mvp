@@ -117,7 +117,7 @@ def display_campaign_preview(
             ASSETS_PATH_PREFIX,
             DASHBOARD_ASSETS_PATH_PREFIX,
         )
-        st.image(img_path, caption=banner_data.get("name"))
+        st.image(img_path, caption=banner_data.get("name"), use_container_width=True)
 
         dimensions = f"{banner_data.get('width_px')}x{banner_data.get('height_px')}"
         st.write(f"**Dimensions:** {dimensions} pixels")
@@ -145,7 +145,7 @@ def campaign_form_step1() -> None:  # noqa: C901,PLR0915
         )
 
     # AI name suggestion button
-    if product_type and audience_type and st.button("🤖 Suggest Campaign Name"):
+    if product_type and audience_type and st.button("🤖 Suggest Campaign Name", key="suggest_name_btn"):
         with st.spinner("Generating campaign name..."):
             try:
                 suggested_name = generate_campaign_name(product_type, audience_type)
@@ -159,7 +159,7 @@ def campaign_form_step1() -> None:  # noqa: C901,PLR0915
     # Display suggested name if available
     if "suggested_name" in st.session_state:
         st.success(f"Suggested: {st.session_state['suggested_name']}")
-        if st.button("Use This Name"):
+        if st.button("Use This Name", key="use_suggested_name_btn"):
             st.session_state[SESSION_CAMPAIGN_DATA] = {
                 **st.session_state.get(SESSION_CAMPAIGN_DATA, {}),
                 "name": st.session_state["suggested_name"],
@@ -233,7 +233,7 @@ def campaign_form_step1() -> None:  # noqa: C901,PLR0915
         st.warning(ERROR_END_DATE)
         form_valid = False
 
-    if st.button(BUTTON_NEXT_BANNER) and form_valid:
+    if st.button(BUTTON_NEXT_BANNER, key="next_banner_btn") and form_valid:
         # Save campaign data to session state
         end_date_value = None
         if end_date_required and end_date:
@@ -260,16 +260,16 @@ def campaign_form_step2() -> None:
     col1, col2 = st.columns(2)
 
     with col1:
-        if st.button(BUTTON_BACK):
+        if st.button(BUTTON_BACK, key="back_to_step1_btn"):
             st.session_state[SESSION_CAMPAIGN_STEP] = STEP_1
             st.rerun()
 
     with col2:
-        if st.button(BUTTON_NEXT_TARGETING) and banner_data:
+        if st.button(BUTTON_NEXT_TARGETING, key="next_targeting_btn") and banner_data:
             st.session_state[SESSION_BANNER_DATA] = banner_data
             st.session_state[SESSION_CAMPAIGN_STEP] = STEP_3
             st.rerun()
-        elif st.button(BUTTON_NEXT_TARGETING):
+        elif st.button(BUTTON_NEXT_TARGETING, key="next_targeting_error_btn"):
             st.warning(ERROR_UPLOAD_BANNER)
 
 
@@ -281,12 +281,12 @@ def campaign_form_step3() -> None:
     col1, col2 = st.columns(2)
 
     with col1:
-        if st.button(BUTTON_BACK):
+        if st.button(BUTTON_BACK, key="back_to_step2_btn"):
             st.session_state[SESSION_CAMPAIGN_STEP] = STEP_2
             st.rerun()
 
     with col2:
-        if st.button(BUTTON_NEXT_REVIEW):
+        if st.button(BUTTON_NEXT_REVIEW, key="next_review_btn"):
             if not targeting_data.get("locations"):
                 st.warning(ERROR_LOCATION_REQUIRED)
             elif not targeting_data.get("interests"):
@@ -309,12 +309,12 @@ def campaign_form_step4() -> None:
     col1, col2 = st.columns(2)
 
     with col1:
-        if st.button(BUTTON_BACK):
+        if st.button(BUTTON_BACK, key="back_to_step3_btn"):
             st.session_state[SESSION_CAMPAIGN_STEP] = STEP_3
             st.rerun()
 
     with col2:
-        if st.button(BUTTON_CREATE_CAMPAIGN):
+        if st.button(BUTTON_CREATE_CAMPAIGN, key="create_campaign_btn"):
             # Create banner
             banner = AdBannerSchema.model_validate(
                 st.session_state[SESSION_BANNER_DATA],

@@ -1,16 +1,8 @@
 import streamlit as st
 
-from dashboard.app.components.analytics_charts import (
-    display_campaign_analytics_dashboard,
-)
-from dashboard.data.store import get_campaign_store
+from dashboard.app.components import display_campaign_analytics_dashboard
+from dashboard.data.store import campaign_store
 from dashboard.services.analytics_service import generate_mock_analytics_data
-
-st.set_page_config(
-    page_title="Dashboard - Advertising Dashboard",
-    page_icon="📊",
-    layout="wide",
-)
 
 
 def main() -> None:
@@ -28,8 +20,7 @@ def main() -> None:
     st.markdown("Overview of your advertising campaigns and performance metrics")
 
     # Get all campaigns
-    campaign_store = get_campaign_store()
-    campaigns = campaign_store.get_all()
+    campaigns = campaign_store.list()
 
     if not campaigns:
         st.info("No campaigns found. Create a campaign to see analytics.")
@@ -52,7 +43,7 @@ def main() -> None:
                 options=list(campaign_options.keys()),
                 format_func=lambda x: campaign_options[x],
             )
-            selected_campaign = campaign_store.get_by_id(selected_campaign_id)
+            selected_campaign = campaign_store.get(selected_campaign_id)
 
     # Display campaign analytics based on selection
     if selected_campaign:

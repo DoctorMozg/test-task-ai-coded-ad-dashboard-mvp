@@ -14,6 +14,7 @@ VALID_FORMATS = ["JPEG", "PNG", "GIF"]
 
 # Standard banner sizes and names
 BANNER_SIZE_LEADERBOARD = (728, 90)
+BANNER_SIZE_LEADERBOARD_X2 = (800, 288)
 BANNER_SIZE_MEDIUM_RECTANGLE = (300, 250)
 BANNER_SIZE_WIDE_SKYSCRAPER = (160, 600)
 BANNER_SIZE_MOBILE_LEADERBOARD = (320, 50)
@@ -21,6 +22,7 @@ BANNER_SIZE_LARGE_RECTANGLE = (336, 280)
 
 STANDARD_BANNER_SIZES = [
     BANNER_SIZE_LEADERBOARD,
+    BANNER_SIZE_LEADERBOARD_X2,
     BANNER_SIZE_MEDIUM_RECTANGLE,
     BANNER_SIZE_WIDE_SKYSCRAPER,
     BANNER_SIZE_MOBILE_LEADERBOARD,
@@ -29,6 +31,7 @@ STANDARD_BANNER_SIZES = [
 
 BANNER_SIZE_NAMES = {
     BANNER_SIZE_LEADERBOARD: "Leaderboard",
+    BANNER_SIZE_LEADERBOARD_X2: "Leaderboard (x2)",
     BANNER_SIZE_MEDIUM_RECTANGLE: "Medium Rectangle",
     BANNER_SIZE_WIDE_SKYSCRAPER: "Wide Skyscraper",
     BANNER_SIZE_MOBILE_LEADERBOARD: "Mobile Leaderboard",
@@ -157,7 +160,7 @@ def image_uploader(user_id: str) -> BannerData | None:
 
     if uploaded_file is not None:
         # Display the image
-        st.image(uploaded_file, caption="Uploaded Banner", use_column_width=True)
+        st.image(uploaded_file, caption="Uploaded Banner", use_container_width=True)
 
         # Validate the image
         validation = validate_image(uploaded_file)
