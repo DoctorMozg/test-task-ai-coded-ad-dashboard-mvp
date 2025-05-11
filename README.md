@@ -1,13 +1,49 @@
 # Advertising Dashboard MVP
 
-A streamlined Advertising Campaign management system built with Streamlit. This MVP allows for campaign creation, management, analytics visualization, and includes AI-powered features for campaign naming and ad copy generation.
+## Author's Note
+
+This project was developed as a technical assessment with the following considerations:
+
+- Streamlit was selected as the framework of choice for rapid MVP prototyping, despite having no prior experience with it. This decision allowed for leveraging AI assistance to bridge knowledge gaps while maintaining development velocity.
+- An in-memory storage solution was implemented to optimize development time while still demonstrating proper data management patterns.
+- Integration with OpenRouter.ai provides AI capabilities (requires a valid API key).
+- Development time totaled approximately 4 hours.
+- While my typical development approach involves incremental, step-by-step processes with targeted AI assistance, the scope of this task led to approximately 95% of the codebase being AI-generated.
+- Campaign data is randomly generated for demonstration purposes.
+
+## Process
+
+1. Preparation
+    1. Configure Cursor AI with project-specific development guidelines
+    2. Set up linters and code quality tools to ensure consistent code standards
+2. Planning
+    1. Develop comprehensive implementation architecture in `aidocs`
+    2. Conduct documentation review and refinement
+    3. Generate project-specific Cursor rules based on architecture decisions
+3. Implementation
+    1. Set up project structure and dependencies
+    2. Implement authentication system
+    3. Create core data models using Pydantic
+    4. Build campaign management interfaces
+    5. Integrate OpenRouter.ai for AI-powered features
+    6. Develop analytics visualization components
+    7. Implement in-memory storage patterns
+4. Testing
+    1. Write unit tests for core functionality
+    2. Perform manual testing of UI workflows
+    3. Test AI integration with various inputs
+    4. Validate analytics calculations
+5. Refinement
+    1. Improve error handling and user feedback
+    2. Enhance UI/UX based on testing results
+    3. Update README
 
 ## Features
 
-- User authentication with secure password management
+- User authentication
 - Campaign creation and management
 - Performance analytics with visualizations
-- AI assistance for campaign naming and copy generation
+- AI assistance for campaign naming and ad copy generation
 - In-memory data storage with efficient patterns
 
 ## Development Setup
@@ -108,6 +144,7 @@ uv run pytest
 ```
 
 The tests cover key functionality including:
+
 - AI integration services with proper mocking
 - Analytics data generation and processing
 - Input validation and error handling
@@ -123,13 +160,3 @@ The tests cover key functionality including:
 ## Development Timeline
 
 Estimated time: 5-6 hours
-
-## Process
-
-1. Preparation
-    1. Configure Cursor AI with project-specific development guidelines
-    2. Set up linters and code quality tools to ensure consistent code standards
-2. Planning
-    1. Develop comprehensive implementation architecture in `aidocs`
-    2. Conduct documentation review and refinement
-    3. Generate project-specific Cursor rules based on architecture decisions
