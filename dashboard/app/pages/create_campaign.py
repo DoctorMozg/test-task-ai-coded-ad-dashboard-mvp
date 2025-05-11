@@ -15,6 +15,7 @@ from dashboard.data.models import (
     CampaignStatusEnum,
 )
 from dashboard.data.store import banner_store, campaign_store, targeting_store
+from dashboard.services.openrouter_service import generate_campaign_name
 
 # Session state keys
 SESSION_CAMPAIGN_STEP = "campaign_step"
@@ -122,9 +123,48 @@ def display_campaign_preview(
         st.write(f"**Dimensions:** {dimensions} pixels")
 
 
-def campaign_form_step1() -> None:
+def campaign_form_step1() -> None:  # noqa: C901,PLR0915
     """Handle Step 1: Campaign Details"""
     st.subheader(STEP_CAMPAIGN_DETAILS)
+
+    # Add product type and target audience for AI name suggestion
+    col1, col2 = st.columns(2)
+
+    with col1:
+        product_type = st.text_input(
+            "Product/Service Type",
+            placeholder="e.g., Fitness App, Online Course, Clothing",
+            value=st.session_state.get("product_type", ""),
+        )
+
+    with col2:
+        audience_type = st.text_input(
+            "Target Audience",
+            placeholder="e.g., Young Professionals, Parents, Students",
+            value=st.session_state.get("audience_type", ""),
+        )
+
+    # AI name suggestion button
+    if product_type and audience_type and st.button("🤖 Suggest Campaign Name"):
+        with st.spinner("Generating campaign name..."):
+            try:
+                suggested_name = generate_campaign_name(product_type, audience_type)
+                st.session_state["suggested_name"] = suggested_name
+                st.session_state["product_type"] = product_type
+                st.session_state["audience_type"] = audience_type
+                st.rerun()
+            except Exception as e:  # noqa: BLE001
+                st.error(f"Error generating name: {e!s}")
+
+    # Display suggested name if available
+    if "suggested_name" in st.session_state:
+        st.success(f"Suggested: {st.session_state['suggested_name']}")
+        if st.button("Use This Name"):
+            st.session_state[SESSION_CAMPAIGN_DATA] = {
+                **st.session_state.get(SESSION_CAMPAIGN_DATA, {}),
+                "name": st.session_state["suggested_name"],
+            }
+            st.rerun()
 
     campaign_name = st.text_input(
         "Campaign Name",
@@ -146,9 +186,9 @@ def campaign_form_step1() -> None:
         step=BUDGET_STEP,
     )
 
-    col1, col2 = st.columns(2)
+    date_col1, date_col2 = st.columns(2)
 
-    with col1:
+    with date_col1:
         default_start = datetime.now(UTC) + timedelta(days=DEFAULT_DATE_OFFSET_DAYS)
         start_date = st.date_input(
             "Start Date",
@@ -159,7 +199,7 @@ def campaign_form_step1() -> None:
             min_value=datetime.now(UTC).date(),
         )
 
-    with col2:
+    with date_col2:
         end_date_required = st.checkbox(
             "Set End Date",
             value=bool(st.session_state[SESSION_CAMPAIGN_DATA].get("end_date")),
